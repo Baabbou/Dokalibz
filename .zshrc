@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR='nano'
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+export PATH=$PATH:/usr/local/go/bin:/opt/go/bin
 
 ZSH_THEME="gnzh"
 plugins=(
@@ -18,7 +18,7 @@ alias wl-password="find /opt/SecLists-master/Passwords/ -type f | fzf"
 alias wl-web="find /opt/SecLists-master/Discovery/Web-Content/ -type f | fzf"
 
 alias rce="/opt/rce/rce.sh"
-alias cupp="/opt/cupp/.venv/bin/python /opt/cupp/cupp.py"
+alias cupp="/usr/bin/python3 /opt/cupp/cupp.py"
 alias jwtool="/opt/jwt_tool/.venv/bin/python /opt/jwt_tool/jwt_tool.py"
 alias hexhttp="/opt/HExHTTP/.venv/bin/python /opt/HExHTTP/hexhttp.py"
 alias rce="/opt/rce/rce.sh"

@@ -21,16 +21,17 @@ RUN apt-get install -y nmap hashcat
 # seclists
 RUN wget -c https://github.com/danielmiessler/SecLists/archive/master.zip -O SecList.zip && unzip SecList.zip && rm -f SecList.zip
 
+RUN mkdir -p /opt/go/bin && \
     # dnsx
-RUN /usr/local/go/bin/go install github.com/projectdiscovery/dnsx/cmd/dnsx@latest && \
+    GOBIN=/opt/go/bin /usr/local/go/bin/go install github.com/projectdiscovery/dnsx/cmd/dnsx@latest && \
     # subfinder
-    /usr/local/go/bin/go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest && \
+    GOBIN=/opt/go/bin /usr/local/go/bin/go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest && \
     # httpx
-    /usr/local/go/bin/go install github.com/projectdiscovery/httpx/cmd/httpx@latest && \
+    GOBIN=/opt/go/bin /usr/local/go/bin/go install github.com/projectdiscovery/httpx/cmd/httpx@latest && \
     # ffuf
-    /usr/local/go/bin/go install github.com/ffuf/ffuf/v2@latest && \
+    GOBIN=/opt/go/bin /usr/local/go/bin/go install github.com/ffuf/ffuf/v2@latest && \
     # katana
-    CGO_ENABLED=1 /usr/local/go/bin/go install github.com/projectdiscovery/katana/cmd/katana@latest
+    GOBIN=/opt/go/bin CGO_ENABLED=1 /usr/local/go/bin/go install github.com/projectdiscovery/katana/cmd/katana@latest
 
     # cupp
 RUN git clone https://github.com/Mebus/cupp.git && \
@@ -72,4 +73,7 @@ RUN echo -y | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmy
 
 COPY .zshrc /home/babbz-doka/.zshrc
 
-CMD ["/usr/local/go/bin/go"]
+WORKDIR /home/babbz-doka
+RUN mkdir -p ~/.local/share && tldr -u
+
+CMD ["/usr/bin/zsh"]
