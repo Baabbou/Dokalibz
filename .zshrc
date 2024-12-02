@@ -19,9 +19,11 @@ alias wl-web="find /opt/SecLists-master/Discovery/Web-Content/ -type f | fzf"
 
 alias rce="/opt/rce/rce.sh"
 alias cupp="/usr/bin/python3 /opt/cupp/cupp.py"
-alias jwtool="/opt/jwt_tool/.venv/bin/python /opt/jwt_tool/jwt_tool.py"
-alias hexhttp="/opt/HExHTTP/.venv/bin/python /opt/HExHTTP/hexhttp.py"
-alias rce="/opt/rce/rce.sh"
+alias jwtool="/opt/jwt_tool/.venv/bin/python3 /opt/jwt_tool/jwt_tool.py"
+alias hexhttp="/opt/HExHTTP/.venv/bin/python3 /opt/HExHTTP/hexhttp.py"
+alias oke="/opt/oke/.venv/bin/python3 /opt/oke/oke.py"
+
+alias cmn-ffuf="ffuf -c -r -H 'User-Agent: Mozilla/5.0 Firefox/126.0' -w '/opt/rce/dist/common-custom.txt' -o '$PWD/ffuf.json' -u"
 #### Pentest ####
 
 #### Forensic ####

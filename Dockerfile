@@ -3,17 +3,17 @@ FROM debian:12.8
 WORKDIR /opt
 
 RUN apt-get update && apt-get upgrade 
-RUN apt-get install -y sudo curl wget iproute2 nano git zip unzip tldr zsh xxd file \
+RUN apt-get install -y sudo curl wget iproute2 nano git zip unzip tldr dnsutils zsh xxd file \
     python3-venv python3-pip python-is-python3 python3-flask python3-aiohttp \
-    openssl build-essential iputils-ping arp-scan netcat-openbsd fzf
+    openssl build-essential iputils-ping arp-scan netcat-openbsd fzf ftp
 
 # go
 RUN wget https://go.dev/dl/go1.23.3.linux-amd64.tar.gz -O /tmp/go1.23.3.linux-amd64.tar.gz && \
     tar -C /usr/local -xzf /tmp/go1.23.3.linux-amd64.tar.gz
 
 # oke
-RUN git clone https://github.com/Baabbou/oke.git && chmod +x ./oke/scripts/install.sh && sudo ./oke/scripts/install.sh
-
+RUN git clone https://github.com/Baabbou/oke.git && python -m venv ./oke/.venv && \
+    ./oke/.venv/bin/pip install -r ./oke/requirements.txt
 
 #### Pentest ####
 RUN apt-get install -y nmap hashcat
@@ -42,7 +42,7 @@ RUN git clone https://github.com/Mebus/cupp.git && \
     git clone https://github.com/c0dejump/HExHTTP.git && python -m venv ./HExHTTP/.venv && \
     ./HExHTTP/.venv/bin/pip install -r ./HExHTTP/requirements.txt && \
     # rce
-    git clone https://github.com/Baabbou/rce.git
+    git clone https://github.com/Baabbou/rce.git    
 #### Pentest ####
 
 
@@ -63,8 +63,11 @@ RUN git clone https://github.com/Mebus/cupp.git && \
 
 
 # setup user
-RUN useradd --groups 'sudo' --create-home --shell '/usr/bin/zsh' --password 'babbz' babbz-doka && chown -R babbz-doka:babbz-doka /opt
+RUN useradd --groups 'sudo' --create-home --shell '/usr/bin/zsh' babbz-doka && chown -R babbz-doka:babbz-doka /opt
+RUN echo 'babbz-doka:babbz' | chpasswd
 USER babbz-doka
+
+
 
 # setup zsh
 RUN echo -y | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
