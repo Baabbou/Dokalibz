@@ -5,7 +5,7 @@ WORKDIR /opt
 RUN apt-get update && apt-get upgrade 
 RUN apt-get install -y sudo curl wget iproute2 nano git zip unzip tldr dnsutils zsh xxd file \
     python3-venv python3-pip python-is-python3 python3-flask python3-aiohttp \
-    openssl build-essential iputils-ping arp-scan netcat-openbsd fzf ftp
+    openssl build-essential iputils-ping arp-scan netcat-openbsd fzf ftp default-mysql-client
 
 # go
 RUN wget https://go.dev/dl/go1.23.3.linux-amd64.tar.gz -O /tmp/go1.23.3.linux-amd64.tar.gz && \
