@@ -2,7 +2,7 @@ FROM debian:12.8
 
 WORKDIR /opt
 
-RUN apt-get update && apt-get upgrade 
+RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install -y sudo curl wget iproute2 nano git zip unzip tldr dnsutils zsh xxd file \
     python3-venv python3-pip python-is-python3 python3-flask python3-aiohttp \
     openssl build-essential iputils-ping arp-scan netcat-openbsd fzf ftp default-mysql-client
@@ -19,7 +19,7 @@ RUN git clone https://github.com/Baabbou/oke.git && python -m venv ./oke/.venv &
 RUN apt-get install -y nmap hashcat
 
 # seclists
-RUN wget -c https://github.com/danielmiessler/SecLists/archive/master.zip -O SecList.zip && unzip SecList.zip && rm -f SecList.zip
+# RUN wget -c https://github.com/danielmiessler/SecLists/archive/master.zip -O SecList.zip && unzip SecList.zip && rm -f SecList.zip
 
 RUN mkdir -p /opt/go/bin && \
     # dnsx
@@ -47,10 +47,7 @@ RUN git clone https://github.com/Mebus/cupp.git && \
 
 
 #### Active Directory ####
-# responder
-# impacket
-# gpp_decrypt
-
+RUN sudo apt install -y smbclient pipx ldap-utils
 #### Active Directory ####
 
 
@@ -67,7 +64,12 @@ RUN useradd --groups 'sudo' --create-home --shell '/usr/bin/zsh' babbz-doka && c
 RUN echo 'babbz-doka:babbz' | chpasswd
 USER babbz-doka
 
-
+#### Active Directory 2 ####
+RUN pip install impacket pypykatz lsassy netifaces pycryptodome --break-system-packages
+RUN pipx ensurepath
+RUN pipx install git+https://github.com/Pennyw0rth/NetExec
+RUN wget http://unixwiz.net/tools/nbtscan-1.0.35-redhat-linux -O ~/.local/bin/nbtscan && chmod +x ~/.local/bin/nbtscan
+#### Active Directory 2 ####
 
 # setup zsh
 RUN echo -y | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \

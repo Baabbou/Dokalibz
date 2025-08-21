@@ -1,6 +1,8 @@
+export LANG=C.UTF-8
+
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR='nano'
-export PATH=$PATH:/usr/local/go/bin:/opt/go/bin
+export PATH=$PATH:/usr/local/go/bin:/opt/go/bin:$HOME/.local/bin
 
 ZSH_THEME="gnzh"
 plugins=(
@@ -22,8 +24,6 @@ alias cupp="/usr/bin/python3 /opt/cupp/cupp.py"
 alias jwtool="/opt/jwt_tool/.venv/bin/python3 /opt/jwt_tool/jwt_tool.py"
 alias hexhttp="/opt/HExHTTP/.venv/bin/python3 /opt/HExHTTP/hexhttp.py"
 alias oke="/opt/oke/.venv/bin/python3 /opt/oke/oke.py"
-
-alias cmn-ffuf="ffuf -c -r -H 'User-Agent: Mozilla/5.0 Firefox/126.0' -w '/opt/rce/dist/common-custom.txt' -o '$PWD/ffuf.json' -u"
 #### Pentest ####
 
 #### Forensic ####
