@@ -33,7 +33,9 @@ RUN mkdir -p /opt/go/bin && \
     # katana
     GOBIN=/opt/go/bin CGO_ENABLED=1 /usr/local/go/bin/go install github.com/projectdiscovery/katana/cmd/katana@latest && \
     # cvemap
-    GOBIN=/opt/go/bin /usr/local/go/bin/go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest
+    GOBIN=/opt/go/bin /usr/local/go/bin/go install github.com/projectdiscovery/cvemap/cmd/vulnx@latest && \
+    # tlsx
+    GOBIN=/opt/go/bin /usr/local/go/bin/go install github.com/projectdiscovery/tlsx/cmd/tlsx@latest
 
 RUN mkdir -p /home/doka/.local/bin
 
