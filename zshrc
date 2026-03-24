@@ -19,4 +19,3 @@ alias wl-all="find /opt/SecLists-master/ -type f | fzf"
 alias wl-password="find /opt/SecLists-master/Passwords/ -type f | fzf"
 alias wl-web="find /opt/SecLists-master/Discovery/Web-Content/ -type f | fzf"
 #### Pentest ####
-
