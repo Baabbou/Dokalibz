@@ -11,7 +11,7 @@ docker build -t dokalibz .
 docker run --rm -it -v "$PWD:/host" --name dokalibz dokalibz:latest
 
 # To add an alias
-echo alias doka='docker run --rm -it -v "$PWD:/home/doka/host" --name dokalibz dokalibz:latest >> ~/.bashrc
+echo alias doka='docker run --rm -it --net=host --cap-add=NET_RAW --cap-add=NET_ADMIN -v "$PWD:/home/doka/host" --name dokalibz dokalibz:latest >> ~/.bashrc
 ```
 
 # Contact

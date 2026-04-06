@@ -1,17 +1,19 @@
-FROM debian:12.8
+FROM debian:13.4
 
 WORKDIR /opt
 
 RUN apt-get update -y && apt-get upgrade -y
 RUN apt-get install -y sudo curl wget iproute2 nano git zip unzip dnsutils zsh xxd file \
-    python3-venv python3-pip python-is-python3 python3-flask python3-aiohttp samba libkrb5-dev \
-    openssl build-essential iputils-ping arp-scan netcat-openbsd fzf ftp default-mysql-client \
-    nmap hashcat pipx ldap-utils
+    python3-venv python3-pip python-is-python3 pipx samba libkrb5-dev openssl build-essential \
+    iputils-ping arp-scan netcat-openbsd fzf ftp default-mysql-client nmap hashcat proxychains4 \
+    ldap-utils krb5-user tesseract-ocr libreoffice tesseract-ocr-eng tesseract-ocr-osd && \
+    rm -rf /var/lib/apt/lists/*
 
 # setup user
 RUN useradd --create-home --shell '/usr/bin/zsh' doka && \
     echo 'doka:doka' | chpasswd && \
-    echo 'doka ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers
+    echo 'doka ALL=(ALL:ALL) NOPASSWD: ALL' >> /etc/sudoers && \
+    echo 'Defaults secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin::/usr/local/go/bin:/opt/go/bin:/home/doka/.local/bin"' >> /etc/sudoers
 COPY zshrc /home/doka/zshrc
 
 # seclists
@@ -79,17 +81,21 @@ RUN chown -R doka:doka /opt /home/doka
 USER doka
 
 # pip tools
-RUN pip install pypykatz netifaces pycryptodome impacket --break-system-packages
+RUN pip install netifaces pycryptodome --break-system-packages
 
-RUN pipx ensurepath
+RUN pipx ensurepath --global
 RUN pipx install git+https://github.com/Pennyw0rth/NetExec && \
+    pipx install git+https://github.com/fortra/impacket && \
+    pipx install git+https://github.com/blacklanternsecurity/MANSPIDER && \
     pipx install git+https://github.com/login-securite/lsassy && \
-    pipx install git+https://github.com/brightio/penelope && \
     pipx install git+https://github.com/dirkjanm/BloodHound.py && \
     pipx install git+https://github.com/synacktiv/gpoParser && \
     pipx install git+https://github.com/CravateRouge/bloodyAD && \
     pipx install git+https://github.com/franc-pentest/ldeep && \
-    pipx install tldr
+    pipx install git+https://github.com/lgandx/Responder && \
+    pipx install git+https://github.com/skelsec/pypykatz && \
+    pipx install git+https://github.com/brightio/penelope && \
+    pipx install git+https://github.com/tldr-pages/tldr-python-client
 
 # setup zsh
 RUN echo -y | sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
