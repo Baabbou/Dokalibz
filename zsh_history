@@ -3,7 +3,7 @@
 : 1773000000:0;find ./manspider -type f \( -iname "*.kdbx" -o -iname "*.kdb" -o -iname "*.1pif" -o -iname "*.agilekeychain" -o -iname "*.opvault" -o -iname "*.lpd" -o -iname "*.dashlane" -o -iname "*.psafe3" -o -iname "*.enpass" -o -iname "*.bwdb" -o -iname "*.msecure" -o -iname "*.stickypass" -o -iname "*.pwm" -o -iname "*.rdb" -o -iname "*.safe" -o -iname "*.zps" -o -iname "*.pmvault" -o -iname "*.mywallet" -o -iname "*.jpass" -o -iname "*.pwmdb" \) -exec ls --color {} \; 2>/dev/null
 : 1773000000:0;find ./manspider -type f \( -iname "*.bat" -o -iname "*.vbs" -o -iname "*.ps1" -o -iname "*.psd1" -o -iname "*.psm1" -o -iname "*.sh" -o -iname "*.sql" \) -exec ls --color {} \; 2>/dev/null
 : 1773000000:0;find ./manspider -type f \( -iname "*.conf" -o -iname "*.config" -o -iname "*.yml" -o -iname "*.yaml" -o -iname "*.db" -o -iname "*.sql*" \) -exec ls --color {} \; 2>/dev/null
-: 1773000000:0;nano ./.local/share/pipx/venvs/responder-poisoner/lib/python3.13/site-packages/Responder.conf
+: 1773000000:0;nano ~/.local/share/pipx/venvs/responder-poisoner/lib/python3.13/site-packages/Responder.conf
 : 1773000000:0;rce -d dokalibz.local
 : 1773000000:0;oke -f 4 'Dokalibz :)'
 : 1773000000:0;oke '<'
