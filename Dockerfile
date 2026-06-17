@@ -43,8 +43,8 @@ RUN mkdir -p /opt/go/bin && \
 RUN mkdir -p /home/doka/.local/bin
 
 # psudohash
-RUN git clone https://github.com/t3l3machus/psudohash.git && chmod +x /opt/psudohash/psudohash.py && \
-    echo 'alias psudohash.py="cd /opt/psudohash/ && python3 psudohash.py"' >> /home/doka/zshrc
+RUN git clone https://github.com/t3l3machus/psudohash.git && python -m venv /opt/psudohash/.venv && \
+    /opt/psudohash/.venv/bin/pip install tqdm
 
 # jwtool
 RUN git clone https://github.com/ticarpi/jwt_tool.git && python -m venv /opt/jwt_tool/.venv && \
@@ -81,18 +81,18 @@ RUN chown -R doka:doka /opt /home/doka
 USER doka
 
 # pip tools
-RUN pip install netifaces pycryptodome --break-system-packages
+RUN pip install netifaces pycryptodome git+https://github.com/fortra/impacket --break-system-packages
 
 RUN pipx ensurepath --global
 RUN pipx install git+https://github.com/Pennyw0rth/NetExec && \
-    pipx install git+https://github.com/fortra/impacket && \
     pipx install git+https://github.com/blacklanternsecurity/MANSPIDER && \
     pipx install git+https://github.com/login-securite/lsassy && \
-    pipx install git+https://github.com/dirkjanm/BloodHound.py && \
+#    pipx install git+https://github.com/dirkjanm/BloodHound.py && \
     pipx install git+https://github.com/synacktiv/gpoParser && \
     pipx install git+https://github.com/CravateRouge/bloodyAD && \
     pipx install git+https://github.com/franc-pentest/ldeep && \
     pipx install git+https://github.com/lgandx/Responder && \
+    pipx install git+https://github.com/dirkjanm/mitm6 && \
     pipx install git+https://github.com/skelsec/pypykatz && \
     pipx install git+https://github.com/brightio/penelope && \
     pipx install git+https://github.com/tldr-pages/tldr-python-client

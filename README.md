@@ -19,7 +19,7 @@ function doka {
     if [[ "$?" == "0" ]]; then
         docker exec -u doka -it dokalibz /usr/bin/zsh
     else
-        docker run --rm --name dokalibz --net=host --cap-add=NET_RAW --cap-add=NET_ADMIN -it -v "/home/tklingler/Documents/Cyber:/home/doka/cyber" -v "$PWD:/home/doka/host" dokalibz:latest
+        docker run --rm --name dokalibz --net=host --cap-add=NET_RAW --cap-add=NET_ADMIN -it -v "$HOME/Documents/Cyber:/home/doka/cyber" -v "$PWD:/home/doka/host" dokalibz:latest
     fi
 }
 ```
